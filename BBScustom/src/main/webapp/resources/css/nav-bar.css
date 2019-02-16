@@ -1,0 +1,15 @@
+@charset "EUC-KR";
+/*전체영역*/
+@import url(http://fonts.googlepis.com/earlyaccess/namumgotic.css)
+*{
+	font-family: 'Namum Gothic';	
+}
+a{
+	color: #000000;
+	text-decoration: none;
+}
+a:hover{
+	color:bbbbbb;
+	text-decoration: none;
+	cursor: pointer;
+}
