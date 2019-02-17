@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Home</title>
-	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/resources/css/nav-bar.css" rel="stylesheet">
+	<c:set var="resources" value="${pageContext.request.contextPath}/resources" />
+	<link href="${resources}/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${resources}/css/nav-bar.css" rel="stylesheet">
 	<style type="text/css">
 		.jumbotron{
-			background-image: url('${pageContext.request.contextPath}/resources/images/background0.png');
+			background-image: url('${resources}/images/background0.png');
 			text-shadow: black 0.2em 0.2em 0.2em;
 			color: white;
 		}
@@ -54,6 +55,7 @@
 			</div>
 		</div>
 	</nav>
+	
 	<div class="container">
 		<div class="jumbotron">
 			<h1 class="text-center">점보트론</h1>
@@ -61,14 +63,24 @@
 			<P class="text-center">  <a class="btn btn-primary btn-lg" href="#" role="button">버튼</a> </P>
 		</div>	
 	</div>
-	<!--footer style="backgorund-color: #000000; color: #ffffff">
+	
+	<footer style="background-color: #000000; color: #ffffff">
 		<div>
 			<br>
 			<div class="row">
 				<div class="col-sm-2" style="text-align: center;"><h5>푸터</h5><h5>footer</h5></div>
+				<div class="col-sm-4" style="text-align: left;"><h4>푸터</h4><h4>footer</h4></div>
+				<div class="col-sm-2" style="text-align: center;"><h4>리스트</h4>
+					<div class="list-group">
+					<a href="#" class="list-group-item">aaa</a>
+					<a href="#" class="list-group-item">bbb</a>
+					</div>
 				</div>
+				<div class="col-sm-4"><span class="glyphicon-ok"></span>ccc</div>
+			</div>
 		</div>
-	</footer-->
+	</footer>
+	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
