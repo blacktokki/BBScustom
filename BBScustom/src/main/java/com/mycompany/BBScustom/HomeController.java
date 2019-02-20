@@ -41,10 +41,11 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = {"/*"}, method = RequestMethod.GET)
+	@RequestMapping(value = "/*", method = RequestMethod.GET)
 	public String home(HttpServletRequest request)
 	{
 		String str=request.getRequestURI();
+		//String id = request.getParameter("id");
 		logger.info("request.getServletPath is {}.", str);
 		return "redirect:/";
 	}

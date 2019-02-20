@@ -33,6 +33,7 @@
 			<attribute name="maven.artifactId" value="spring-web"/>
 			<attribute name="maven.version" value="4.3.20.RELEASE"/>
 			<attribute name="maven.scope" value="compile"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
