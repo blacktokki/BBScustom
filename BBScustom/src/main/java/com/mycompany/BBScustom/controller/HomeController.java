@@ -1,4 +1,4 @@
-package com.mycompany.BBScustom;
+package com.mycompany.BBScustom.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -10,11 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.servlet.NoHandlerFoundException;
+//import org.springframework.web.bind.annotation.ExceptionHandler;
+//import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
  * Handles requests for the application home page.
@@ -22,12 +21,12 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @Controller
 public class HomeController {
 	
+	//Service service;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */	
-	//@RequestAttribute("javax.servlet.forward.request_uri")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model)
 	{
@@ -41,16 +40,18 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/*", method = RequestMethod.GET)
-	public String home(HttpServletRequest request)
+	@RequestMapping(value = {"/{val:[^(resources)].*}/**","/*"},method = RequestMethod.GET)
+	public String home(HttpServletRequest request, Model model)
 	{
 		String str=request.getRequestURI();
-		//String id = request.getParameter("id");
-		logger.info("request.getServletPath is {}.", str);
-		return "redirect:/";
+		String str2=str.replaceFirst(request.getContextPath(),"");
+		str2=str2.substring(0,str2.lastIndexOf("/"));
+		logger.info("str:{} {}",str, str2);
+		return "redirect:"+str2;
 	}
+	/*
 	@ExceptionHandler(NoHandlerFoundException.class)
     public String handle(Exception ex) {
        return "redirect:/";//this is view name
-   }
+   }*/
 }
