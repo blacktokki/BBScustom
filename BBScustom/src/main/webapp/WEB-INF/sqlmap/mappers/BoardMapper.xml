@@ -1,5 +1,5 @@
-<mapper namespace="com.mycompany.BBScustom.service.BoardMapper">
-	<resultmap id="boardMap" type="com.sample.board.vo.BoardVO">
+<mapper namespace="Board">
+	<resultmap id="selectBoardList" type="com.sample.board.dto.BoardDto">
 		<result property="idx" column="idx"/>
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
