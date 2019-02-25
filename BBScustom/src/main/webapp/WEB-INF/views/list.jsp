@@ -21,7 +21,7 @@
 			<td>${dto.bdname}</td>
 			<td>
 				<c:forEach begin="1" end="${dto.indent}">-</c:forEach>
-				<a href="content_view?id=${dto.idx}">${dto.title}</a>
+				<a href="content_view?idx=${dto.idx}">${dto.title}</a>
 			</td>
 			<td>${dto.bddate}</td>
 			<td>${dto.hit}</td>

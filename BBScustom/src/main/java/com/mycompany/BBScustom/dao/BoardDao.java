@@ -21,11 +21,53 @@ public class BoardDao{
 			e.printStackTrace();
 		}
 	}
+	public BoardDto contentView(String idx) {
+		//uphit(idx);
+		BoardDto dto = null;
+		Connection connection=null;
+		PreparedStatement preparedStatement= null;
+		ResultSet resultSet= null;
+		try {
+			connection = dataSource.getConnection();
+			String query="SELECT * FROM board where idx=?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1,Integer.parseInt(idx));
+			resultSet =preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				int idx2=resultSet.getInt("idx");
+				String title=resultSet.getString("title");
+				String content=resultSet.getString("content");
+				String bdname=resultSet.getString("bdname");
+				Timestamp bddate=resultSet.getTimestamp("bddate");
+				int bdgroup=resultSet.getInt("bdgroup");
+				int step=resultSet.getInt("step");
+				int indent=resultSet.getInt("indent");
+				int hit=resultSet.getInt("hit");
+				dto= new BoardDto(idx2,title,content,bdname,bddate,bdgroup,step,indent,hit);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(resultSet !=null)resultSet.close();
+				if(preparedStatement !=null)preparedStatement.close();
+				if(connection !=null)connection.close();
+			}
+			catch(Exception e2) {
+			}
+			
+		}
+		
+		
+		return dto;
+	}
 	
 	public void write(String bdname,String title,String content) {
 		Connection connection=null;
 		PreparedStatement preparedStatement= null;
-		ResultSet resultSet= null;
 		try {
 			connection = dataSource.getConnection();
 			String query="insert into board (title,content,bdname,bdgroup,step,indent) select ?,?,?, ifnull(max(idx),0)+1 ,?,? from board;";
@@ -42,7 +84,6 @@ public class BoardDao{
 		}
 		finally {
 			try {
-				if(resultSet !=null)resultSet.close();
 				if(preparedStatement !=null)preparedStatement.close();
 				if(connection !=null)connection.close();
 			}
