@@ -5,15 +5,15 @@
 		<result property="content" column="content"/>
 		<result property="id" column="id"/>
 		<result property="hit" column="hit"/>
-		<result property="date" column="date"/>
-		<result property="boardgroup" column="boardgroup"/>
+		<result property="bddate" column="bddate"/>
+		<result property="bdgroup" column="bdgroup"/>
 		<result property="step" column="step"/>
-		<result property="intent" column="intent"/>
+		<result property="indent" column="indent"/>
 	</resultmap>
 	
 	<select id="getBoardList" resultmap="boardMap">
 		SELECT
-			idx, title, content, id, hit, date, boardgroup, step, intent
+			idx, title, content, id, hit, bddate, bdgroup, step, indent
 		FORM BOARD
 	</select>
 </mapper>

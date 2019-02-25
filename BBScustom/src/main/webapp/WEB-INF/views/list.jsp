@@ -18,15 +18,18 @@
 		<c:forEach items="${list}" var="dto">
 		<tr>
 			<td>${dto.idx}</td>
-			<td>${dto.name}</td>
-			<td>${dto.id}</td>
+			<td>${dto.bdname}</td>
 			<td>
 				<c:forEach begin="1" end="${dto.indent}">-</c:forEach>
-				<a href="content_view?id=${dto.id}">${dto.title}</a></td>
-			<td>${dto.date}</td>
+				<a href="content_view?id=${dto.idx}">${dto.title}</a>
+			</td>
+			<td>${dto.bddate}</td>
 			<td>${dto.hit}</td>
 		</tr>
 		</c:forEach>
+		<tr>
+			<td colspan="5"><a href="write_view">±€¿€º∫</a></td>
+		</tr>
 	</table>
 
 </body>

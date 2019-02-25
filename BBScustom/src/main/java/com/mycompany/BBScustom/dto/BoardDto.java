@@ -5,28 +5,27 @@ public class BoardDto {
 	int idx;
 	String title;
 	String content;
-	String id;
-	int hit;
-	Timestamp date;
-	int boardgroup;
+	String bdname;
+	Timestamp bddate;
+	int bdgroup;
 	int step;
-	int intent;
+	int indent;
+	int hit;
 	
 	public BoardDto() {
 		
 	}
-	public BoardDto(int idx,String title,String content,String id,int hit,Timestamp date,int boardgroup,int step,int intent) {
+	public BoardDto(int idx,String title,String content,String bdname,Timestamp bddate,int bdgroup,int step,int indent,int hit) {
 		this.idx=idx;
 		this.title=title;
 		this.content=content;
-		this.id=id;
-		this.hit=hit;
-		this.date=date;
-		this.boardgroup=boardgroup;
+		this.bdname=bdname;
+		this.bddate=bddate;
+		this.bdgroup=bdgroup;
 		this.step=step;
-		this.intent=intent;
+		this.indent=indent;
+		this.hit=hit;
 	}
-	
 	public int getIdx() {
 		return idx;
 	}
@@ -45,29 +44,23 @@ public class BoardDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getId() {
-		return id;
+	public String getBdname() {
+		return bdname;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setBdname(String bdname) {
+		this.bdname = bdname;
 	}
-	public int getHit() {
-		return hit;
+	public Timestamp getBddate() {
+		return bddate;
 	}
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setBddate(Timestamp bddate) {
+		this.bddate = bddate;
 	}
-	public Timestamp getDate() {
-		return date;
+	public int getBdgroup() {
+		return bdgroup;
 	}
-	public void setDate(Timestamp date) {
-		this.date = date;
-	}
-	public int getBoardgroup() {
-		return boardgroup;
-	}
-	public void setBoardgroup(int boardgroup) {
-		this.boardgroup = boardgroup;
+	public void setBdgroup(int bdgroup) {
+		this.bdgroup = bdgroup;
 	}
 	public int getStep() {
 		return step;
@@ -75,10 +68,18 @@ public class BoardDto {
 	public void setStep(int step) {
 		this.step = step;
 	}
-	public int getIntent() {
-		return intent;
+	public int getIndent() {
+		return indent;
 	}
-	public void setIntent(int intent) {
-		this.intent = intent;
+	public void setIndent(int indent) {
+		this.indent = indent;
 	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	
+	
 }
