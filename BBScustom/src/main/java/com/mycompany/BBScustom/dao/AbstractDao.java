@@ -5,12 +5,14 @@ import java.sql.*;
 import javax.naming.*;
 import javax.sql.DataSource;
 
+import com.mycompany.BBScustom.dto.AbstractDto;
+
 
 public abstract class AbstractDao {
+
 	protected DataSource dataSource;
-	protected Connection connection;
-	protected PreparedStatement preparedStatement;
-	protected ResultSet resultSet;
+	
+	abstract protected AbstractDto createDto(ResultSet rs) throws SQLException;
 	
 	protected void bindName(String name) {
 		try {
@@ -22,11 +24,14 @@ public abstract class AbstractDao {
 		}
 	}
 	
-	protected void execute(String query,DaoQuery daoquery) {
+	protected void execute(String query,DaoException daoquery) {
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
 		try {
 			connection = dataSource.getConnection();
 			preparedStatement=connection.prepareStatement(query);
-			daoquery.executeTry();
+			daoquery.executeTry(preparedStatement,resultSet);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

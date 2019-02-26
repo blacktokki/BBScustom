@@ -3,12 +3,12 @@
 		<result property="idx" column="idx"/>
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
-		<result property="id" column="id"/>
-		<result property="hit" column="hit"/>
+		<result property="bdname" column="bdname"/>
 		<result property="bddate" column="bddate"/>
 		<result property="bdgroup" column="bdgroup"/>
 		<result property="step" column="step"/>
 		<result property="indent" column="indent"/>
+		<result property="hit" column="hit"/>
 	</resultmap>
 	
 	<select id="getBoardList" resultmap="boardMap">

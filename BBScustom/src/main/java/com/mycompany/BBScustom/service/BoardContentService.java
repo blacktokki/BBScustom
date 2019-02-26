@@ -19,6 +19,7 @@ public class BoardContentService implements BoardService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		String idx=request.getParameter("idx");
 		BoardDao dao = new BoardDao();
+		dao.upHit(idx);
 		BoardDto dto = dao.contentView(idx);
 		model.addAttribute("content_view",dto);
 	}

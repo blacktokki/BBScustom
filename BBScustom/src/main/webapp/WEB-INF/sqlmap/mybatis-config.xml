@@ -5,6 +5,6 @@
 		<setting name="defaultExecutorType" value="REUSE"/>
 	</settings>
 	<typealiases>
-		<typealias alias="board" type="com.sample.board.vo.boardVO"/>
+		<typealias alias="board" type="com.sample.board.dto.BoardDto"/>
 	</typealiases>
 </configration>
