@@ -10,7 +10,10 @@ import com.mycompany.BBScustom.dto.BoardDto;
 
 public class BoardDao{
 	
-	DataSource dataSource;
+	private DataSource dataSource;
+	private Connection connection;
+	private PreparedStatement preparedStatement;
+	private ResultSet resultSet;
 	
 	public BoardDao(){
 		try {
@@ -21,16 +24,27 @@ public class BoardDao{
 			e.printStackTrace();
 		}
 	}
-	public BoardDto contentView(String idx) {
-		//uphit(idx);
-		BoardDto dto = null;
-		Connection connection=null;
-		PreparedStatement preparedStatement= null;
-		ResultSet resultSet= null;
+	
+	private PreparedStatement connect(String query) throws SQLException{
+		connection = dataSource.getConnection();
+		return connection.prepareStatement(query);
+	}
+	
+	private void disconnect() {
 		try {
-			connection = dataSource.getConnection();
-			String query="SELECT * FROM board where idx=?";
-			preparedStatement = connection.prepareStatement(query);
+			if(resultSet !=null)resultSet.close();
+			if(preparedStatement !=null)preparedStatement.close();
+			if(connection !=null)connection.close();
+		}
+		catch(Exception e) {
+		}
+	}
+
+	public BoardDto contentView(String idx) {
+		upHit(idx);
+		BoardDto  dto= new BoardDto();
+		try {
+			preparedStatement=connect("SELECT * FROM board where idx=?");
 			preparedStatement.setInt(1,Integer.parseInt(idx));
 			resultSet =preparedStatement.executeQuery();
 			
@@ -51,58 +65,16 @@ public class BoardDao{
 			e.printStackTrace();
 		}
 		finally {
-			try {
-				if(resultSet !=null)resultSet.close();
-				if(preparedStatement !=null)preparedStatement.close();
-				if(connection !=null)connection.close();
-			}
-			catch(Exception e2) {
-			}
-			
+			disconnect();
 		}
-		
 		
 		return dto;
 	}
 	
-	public void write(String bdname,String title,String content) {
-		Connection connection=null;
-		PreparedStatement preparedStatement= null;
-		try {
-			connection = dataSource.getConnection();
-			String query="insert into board (title,content,bdname,bdgroup,step,indent) select ?,?,?, ifnull(max(idx),0)+1 ,?,? from board;";
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1,title);
-			preparedStatement.setString(2,content);
-			preparedStatement.setString(3,bdname);
-			preparedStatement.setInt(4,0);
-			preparedStatement.setInt(5,0);			
-			preparedStatement.executeUpdate();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				if(preparedStatement !=null)preparedStatement.close();
-				if(connection !=null)connection.close();
-			}
-			catch(Exception e2) {
-			}
-			
-		}
-		
-	}
-	
 	public ArrayList<BoardDto> list(){
 		ArrayList<BoardDto> dtos=new ArrayList<BoardDto>();
-		Connection connection=null;
-		PreparedStatement preparedStatement= null;
-		ResultSet resultSet= null;
 		try {
-			connection = dataSource.getConnection();
-			String query="SELECT idx, title, content, bdname, bddate, bdgroup, step, indent, hit FROM board";
-			preparedStatement = connection.prepareStatement(query);
+			preparedStatement=connect("SELECT idx, title, content, bdname, bddate, bdgroup, step, indent, hit FROM board");
 			resultSet =preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
@@ -119,26 +91,35 @@ public class BoardDao{
 				dtos.add(dto);
 			}
 		}
-		catch(SQLException sql){
-	        System.out.println("SQLException: " + sql.getMessage());
-	        System.out.println("SQLState: " + sql.getSQLState());
-	        System.out.println("Erro: " + sql.getErrorCode());
-	        System.out.println("StackTrace: " + sql.getStackTrace());
-	    }
 		catch(Exception e) {
-			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		finally {
-			try {
-				if(resultSet !=null)resultSet.close();
-				if(preparedStatement !=null)preparedStatement.close();
-				if(connection !=null)connection.close();
-			}
-			catch(Exception e2) {
-			}
-			
+			disconnect();
 		}
 		return dtos;
+	}
+	
+	public void write(String bdname,String title,String content) {
+		try {
+			preparedStatement=connect("insert into board (title,content,bdname,bdgroup,step,indent) select ?,?,?, ifnull(max(idx),0)+1 ,?,? from board;");
+			preparedStatement.setString(1,title);
+			preparedStatement.setString(2,content);
+			preparedStatement.setString(3,bdname);
+			preparedStatement.setInt(4,0);
+			preparedStatement.setInt(5,0);			
+			preparedStatement.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			disconnect();
+		}
+		
+	}
+	
+	private void upHit(String idx) {
+		
 	}
 }
