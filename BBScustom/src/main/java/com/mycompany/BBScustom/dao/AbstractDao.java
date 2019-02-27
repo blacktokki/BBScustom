@@ -31,14 +31,14 @@ public abstract class AbstractDao {
 		try {
 			connection = dataSource.getConnection();
 			preparedStatement=connection.prepareStatement(query);
-			daoquery.executeTry(preparedStatement,resultSet);
+			resultSet=daoquery.executeTry(preparedStatement,resultSet);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		finally {
 			try {
-				if(resultSet !=null)resultSet.close();
+				if(resultSet !=null) {resultSet.close();}
 				if(preparedStatement !=null)preparedStatement.close();
 				if(connection !=null)connection.close();
 			}

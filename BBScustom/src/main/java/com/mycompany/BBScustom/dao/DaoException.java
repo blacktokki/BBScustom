@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 @FunctionalInterface
 public interface DaoException{
-	public void executeTry(PreparedStatement ps, ResultSet rs) throws SQLException;
+	public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException;
 }
