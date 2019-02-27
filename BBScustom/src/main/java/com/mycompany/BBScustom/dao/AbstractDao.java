@@ -1,23 +1,20 @@
 package com.mycompany.BBScustom.dao;
 
 import java.sql.*;
-
 import javax.naming.*;
 import javax.sql.DataSource;
-
-import com.mycompany.BBScustom.dto.IDto;
-
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 public abstract class AbstractDao {
 
 	protected DataSource dataSource;
+	protected BeanPropertyRowMapper<?> bprm;
 	
-	abstract protected IDto createDto(ResultSet rs) throws SQLException;
-	
-	protected void bindName(String name) {
+	protected <T> void initialize(String name,Class<T> mappedClass) {
 		try {
 			Context context =new InitialContext();
 			dataSource =(DataSource)context.lookup(name);
+			bprm=new BeanPropertyRowMapper<>(mappedClass);
 		}
 		catch(NamingException e) {
 			e.printStackTrace();

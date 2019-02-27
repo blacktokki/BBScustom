@@ -2,36 +2,22 @@ package com.mycompany.BBScustom.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
-
 import com.mycompany.BBScustom.dto.BoardDto;
 
 public class BoardDao extends AbstractDao implements IBoardDao{
 	
 	public BoardDao(){
-		bindName("java:comp/env/jdbc/mydb");
-	}
-	
-	protected BoardDto createDto(ResultSet rs) throws SQLException{
-		int idx=rs.getInt("idx");
-		String title=rs.getString("title");
-		String content=rs.getString("content");
-		String bdname=rs.getString("bdname");
-		Timestamp bddate=rs.getTimestamp("bddate");
-		int bdgroup=rs.getInt("bdgroup");
-		int step=rs.getInt("step");
-		int indent=rs.getInt("indent");
-		int hit=rs.getInt("hit");
-		return new BoardDto(idx,title,content,bdname,bddate,bdgroup,step,indent,hit);
+		initialize("java:comp/env/jdbc/mydb",BoardDto.class);
 	}
 	
 	public BoardDto contentView(String idx) {
-		ArrayList<BoardDto> dtos=new ArrayList<BoardDto>();
+		ArrayList<BoardDto> dtos = new ArrayList<>();
 		execute("SELECT * FROM board where idx=?",new DaoException(){
 			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{
 				ps.setInt(1,Integer.parseInt(idx));
 				rs =ps.executeQuery();
 				if(rs.next()) {
-					BoardDto dto= createDto(rs);
+					BoardDto dto= (BoardDto) bprm.mapRow(rs, 0);
 					dtos.add(dto);
 				}
 				return rs;
@@ -45,8 +31,8 @@ public class BoardDao extends AbstractDao implements IBoardDao{
 		execute("SELECT idx, title, content, bdname, bddate, bdgroup, step, indent, hit FROM board",new DaoException(){
 			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{
 				rs =ps.executeQuery();
-				while(rs.next()) {
-					BoardDto dto= createDto(rs);
+				for(int i=0;rs.next();i++) {
+					BoardDto dto= (BoardDto) bprm.mapRow(rs, i);
 					dtos.add(dto);
 				}
 				return rs;
