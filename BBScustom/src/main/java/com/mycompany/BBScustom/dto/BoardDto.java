@@ -1,7 +1,7 @@
 package com.mycompany.BBScustom.dto;
 import java.sql.Timestamp;
 
-public class BoardDto extends AbstractDto{
+public class BoardDto implements IDto{
 	int idx;
 	String title;
 	String content;

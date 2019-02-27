@@ -5,14 +5,14 @@ import java.sql.*;
 import javax.naming.*;
 import javax.sql.DataSource;
 
-import com.mycompany.BBScustom.dto.AbstractDto;
+import com.mycompany.BBScustom.dto.IDto;
 
 
 public abstract class AbstractDao {
 
 	protected DataSource dataSource;
 	
-	abstract protected AbstractDto createDto(ResultSet rs) throws SQLException;
+	abstract protected IDto createDto(ResultSet rs) throws SQLException;
 	
 	protected void bindName(String name) {
 		try {
