@@ -10,11 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mycompany.BBScustom.service.BoardContentService;
-import com.mycompany.BBScustom.service.BoardListService;
-import com.mycompany.BBScustom.service.BoardService;
-import com.mycompany.BBScustom.service.BoardWriteService;
-
+import com.mycompany.BBScustom.service.*;
 /**
  * Handles requests for the application home page.
  */
@@ -38,7 +34,7 @@ public class BoardController {
 			return  "write_view";
 	}
 	
-	@RequestMapping(value = "/write")
+	@RequestMapping(value = "/write",method=RequestMethod.POST)
 	public String write(HttpServletRequest request,Model model) {
 			logger.info("write()");
 			model.addAttribute("request",request);
@@ -60,16 +56,16 @@ public class BoardController {
 	public String modify(HttpServletRequest request,Model model) {
 		logger.info("modify()");
 		model.addAttribute("request",request);
-		service=new BoardContentService();
+		service=new BoardModifyService();
 		service.excute(model);
 		return  "redirect:list";
 	}
 	
-	@RequestMapping(value = "/reoly_view")
+	@RequestMapping(value = "/reply_view")
 	public String reply_view(HttpServletRequest request,Model model) {
 		logger.info("reply_view()");
 		model.addAttribute("request",request);
-		service=new BoardContentService();
+		service=new BoardReplyViewService();
 		service.excute(model);
 		return "reply_view";
 	}
@@ -78,16 +74,16 @@ public class BoardController {
 	public String reply(HttpServletRequest request,Model model) {
 		logger.info("reply()");
 		model.addAttribute("request",request);
-		service=new BoardContentService();
+		service=new BoardReplyService();
 		service.excute(model);
 		return  "redirect:list";
 	}
 	
-	@RequestMapping(value = "/delete",method=RequestMethod.POST)
+	@RequestMapping(value = "/delete")
 	public String delete(HttpServletRequest request,Model model) {
 		logger.info("delete()");
 		model.addAttribute("request",request);
-		service=new BoardContentService();
+		service=new BoardDeleteService();
 		service.excute(model);
 		return  "redirect:list";
 	}

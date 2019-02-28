@@ -55,6 +55,29 @@ public class BoardDao extends AbstractDao implements IBoardDao{
 		});
 	}
 	
+	public void modify(String idx,String bdname,String title,String content) {
+		execute("update board set bdname = ?,title = ?,content =?  where idx= ? ",new DaoException(){
+			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{
+				ps.setString(1,bdname);
+				ps.setString(2,title);
+				ps.setString(3,content);
+				ps.setInt(4,Integer.parseInt(idx));			
+				ps.executeUpdate();
+				return rs;
+			}
+		});
+	}
+	
+	public void delete(String idx) {
+		execute("delete from board where idx= ? ",new DaoException(){
+			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{
+				ps.setInt(1,Integer.parseInt(idx));			
+				ps.executeUpdate();
+				return rs;
+			}
+		});
+	}
+	
 	public void upHit(String idx) {
 		execute("update board set hit = hit+1 where idx= ? ",new DaoException(){
 			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{

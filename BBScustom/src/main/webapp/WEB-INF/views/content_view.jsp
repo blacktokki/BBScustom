@@ -1,37 +1,37 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>write_view</title>
 </head>
 <body>
-	<form action="write" method="post">
+	<form action="modify" method="post">
 	<input type="hidden" name="idx" value="${content_view.idx}">
 		<table style="width:500; cellpadding:0; cellspacing:0;" border="1">
 			<tr>
-				<td>¹øÈ£</td>
+				<td>ë²ˆí˜¸</td>
 				<td>${content_view.idx}</td>
 			</tr>
 			<tr>
-				<td>È÷Æ®</td>
+				<td>íˆíŠ¸</td>
 				<td>${content_view.hit}</td>
 			</tr>
 			<tr>
-				<td>ÀÌ¸§</td>
+				<td>ì´ë¦„</td>
 				<td><input type="text" name="bdname" value="${content_view.bdname}" size="50"></td>
 			</tr>
 			<tr>
-				<td>Á¦¸ñ</td>
+				<td>ì œëª©</td>
 				<td><input type="text" name="title" value="${content_view.title}" size="50"></td>
 			</tr>
 			<tr>
-				<td>³»¿ë</td>
+				<td>ë‚´ìš©</td>
 				<td><textarea name="content" rows="10">${content_view.content}</textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="¼öÁ¤">&nbsp;&nbsp;<a href="list">¸ñ·Ïº¸±â</a>&nbsp;&nbsp;<a href="delete">»èÁ¦ÇÏ±â</a></td>
+				<td colspan="2"><input type="submit" value="ìˆ˜ì •">&nbsp;&nbsp;<a href="list">ëª©ë¡ë³´ê¸°</a>&nbsp;&nbsp;<a href="delete?idx=${content_view.idx}">ì‚­ì œí•˜ê¸°</a>&nbsp;&nbsp;<a href="reply">ë‹µë³€ë‹¬ê¸°</a></td>
 			</tr>
 		</table>
 	</form>

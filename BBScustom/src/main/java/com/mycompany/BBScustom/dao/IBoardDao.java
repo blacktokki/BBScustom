@@ -11,6 +11,10 @@ public interface IBoardDao{
 	
 	public void write(String bdname,String title,String content);
 	
+	public void modify(String idx,String bdname,String title,String content);
+	
+	public void delete(String idx);
+	
 	public void upHit(String idx);
 
 }
