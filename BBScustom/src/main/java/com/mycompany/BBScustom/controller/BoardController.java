@@ -52,6 +52,18 @@ public class BoardController {
 		return  "content_view";
 	}
 	
+	@RequestMapping(value = "/content_view/**")
+	public String content_view_redirect(HttpServletRequest request) {
+		String idx=request.getParameter("idx");
+		try { 
+	        Integer.parseInt(idx); 
+	    } catch(Exception e) { 
+	    	return "redirect:/";
+	    }
+		return  "redirect:/content_view?idx="+idx;
+	}
+	
+	
 	@RequestMapping(value = "/modify",method=RequestMethod.POST)
 	public String modify(HttpServletRequest request,Model model) {
 		logger.info("modify()");
@@ -68,6 +80,18 @@ public class BoardController {
 		service=new BoardReplyViewService();
 		service.excute(model);
 		return "reply_view";
+	}
+	
+	@RequestMapping(value = "/reply_view/**")
+	public String reply_view_redirect(HttpServletRequest request) {
+		String idx=request.getParameter("idx");
+		try { 
+	        Integer.parseInt(idx); 
+	    } catch(Exception e) { 
+	    	return "redirect:/";
+	    }
+		return  "redirect:/reply_view?idx="+idx;
+			
 	}
 
 	@RequestMapping(value = "/reply",method=RequestMethod.POST)
@@ -87,4 +111,5 @@ public class BoardController {
 		service.excute(model);
 		return  "redirect:list";
 	}
+	
 }

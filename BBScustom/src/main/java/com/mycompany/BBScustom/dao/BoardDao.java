@@ -95,7 +95,6 @@ public class BoardDao extends AbstractDao implements IBoardDao{
 	}
 	
 	public void reply(String idx,String bdname,String title,String content,String bdgroup, String step, String indent){
-		System.out.println("-replydao-");
 		execute("insert into board (title,content,bdname,bdgroup,step,indent) values (?,?,?,?,?,?);",new DaoException(){
 			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{
 				ps.setString(1,title);

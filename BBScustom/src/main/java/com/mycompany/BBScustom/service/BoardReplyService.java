@@ -15,7 +15,6 @@ public class BoardReplyService implements BoardService {
 
 	@Override
 	public void excute(Model model) {
-		System.out.println("-replyservice-");
 		Map<String,Object>map= model.asMap();
 		HttpServletRequest request =(HttpServletRequest) map.get("request");
 		String idx= request.getParameter("idx");
