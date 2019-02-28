@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>write_view</title>
+<title>content_view</title>
 </head>
 <body>
 	<form action="modify" method="post">
@@ -31,10 +31,14 @@
 				<td><textarea name="content" rows="10">${content_view.content}</textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="수정">&nbsp;&nbsp;<a href="list">목록보기</a>&nbsp;&nbsp;<a href="delete?idx=${content_view.idx}">삭제하기</a>&nbsp;&nbsp;<a href="reply">답변달기</a></td>
+				<td colspan="2">
+					<input type="submit" value="수정">&nbsp;&nbsp;
+					<a href="list">목록보기</a>&nbsp;&nbsp;
+					<a href="delete?idx=${content_view.idx}">삭제하기</a>&nbsp;&nbsp;
+					<a href="reply_view?idx=${content_view.idx}">답변달기</a>
+				</td>
 			</tr>
 		</table>
 	</form>
-
 </body>
 </html>

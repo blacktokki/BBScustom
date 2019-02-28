@@ -2,6 +2,9 @@ package com.mycompany.BBScustom.service;
 
 import org.springframework.ui.Model;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class BoartListService implements BoardService {
 
 	@Override

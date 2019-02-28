@@ -1,6 +1,9 @@
 package com.mycompany.BBScustom.dto;
 import java.sql.Timestamp;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BoardDto implements IDto{
 	int idx;
 	String title;

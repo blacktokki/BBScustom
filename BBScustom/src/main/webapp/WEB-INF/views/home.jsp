@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -27,6 +27,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">버튼1<span class="sr-only"></span></a></li>
 					<li><a href="#">버튼2</a></li>
+					<li><a href="list">글목록</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toogle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded='false'>리스트<span class="caret"></span></a>

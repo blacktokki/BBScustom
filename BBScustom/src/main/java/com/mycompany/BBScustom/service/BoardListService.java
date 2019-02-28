@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import com.mycompany.BBScustom.dto.BoardDto;
 import com.mycompany.BBScustom.dao.BoardDao;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class BoardListService implements BoardService {
 
 	@Override

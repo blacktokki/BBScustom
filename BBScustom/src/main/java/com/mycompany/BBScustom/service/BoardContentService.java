@@ -9,7 +9,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class BoardContentService implements BoardService {
 
 	@Override

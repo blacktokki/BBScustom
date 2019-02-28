@@ -7,6 +7,8 @@ public interface IBoardDao{
 	
 	public BoardDto contentView(String idx);
 	
+	public BoardDto replyView(String idx);
+	
 	public ArrayList<BoardDto> list();
 	
 	public void write(String bdname,String title,String content);
@@ -14,6 +16,10 @@ public interface IBoardDao{
 	public void modify(String idx,String bdname,String title,String content);
 	
 	public void delete(String idx);
+	
+	public void reply(String idx,String bdname,String title,String content,String bdgroup, String step, String indent);
+	
+	public void replyShape(String bdgroup,String step);
 	
 	public void upHit(String idx);
 

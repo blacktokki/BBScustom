@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 
 import com.mycompany.BBScustom.dao.BoardDao;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class BoardModifyService implements BoardService {
 
 	@Override
