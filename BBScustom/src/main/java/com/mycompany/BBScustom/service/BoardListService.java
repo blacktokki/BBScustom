@@ -11,7 +11,7 @@ public class BoardListService extends AbstractBoardService {
 	
 	@Override
 	public void excute(Model model) {
-		ArrayList<BoardDto> dtos=dao.list();
+		ArrayList<BoardDto> dtos=boardDao.list();
 		model.addAttribute("list",dtos);
 	}
 

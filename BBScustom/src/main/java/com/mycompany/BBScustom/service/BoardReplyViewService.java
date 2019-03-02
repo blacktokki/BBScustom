@@ -14,7 +14,7 @@ public class BoardReplyViewService extends AbstractBoardService {
 		Map<String,Object> map= model.asMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		String idx=request.getParameter("idx");
-		BoardDto dto = dao.replyView(idx);	
+		BoardDto dto = boardDao.replyView(idx);	
 		model.addAttribute("reply_view",dto);
 
 	}

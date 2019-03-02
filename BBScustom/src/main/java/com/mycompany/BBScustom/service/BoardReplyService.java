@@ -19,8 +19,8 @@ public class BoardReplyService extends AbstractBoardService {
 		String bdgroup= request.getParameter("bdgroup");
 		String step= request.getParameter("step");
 		String indent= request.getParameter("indent");
-		dao.replyShape(bdgroup,step);
-		dao.reply(idx,bdname,title,content,bdgroup,step,indent);
+		boardDao.replyShape(bdgroup,step);
+		boardDao.reply(idx,bdname,title,content,bdgroup,step,indent);
 
 	}
 

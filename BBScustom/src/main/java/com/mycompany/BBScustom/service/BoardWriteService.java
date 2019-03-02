@@ -15,7 +15,7 @@ public class BoardWriteService extends AbstractBoardService {
 		String bdname= request.getParameter("bdname");
 		String title= request.getParameter("title");
 		String content= request.getParameter("content");
-		dao.write(bdname,title,content);
+		boardDao.write(bdname,title,content);
 	}
 
 }

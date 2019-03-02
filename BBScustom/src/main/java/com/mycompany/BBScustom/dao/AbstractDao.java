@@ -13,15 +13,13 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 public abstract class AbstractDao {
 
-	protected  static DataSource dataSource;
-	protected static PlatformTransactionManager transactionManager;
+	protected DataSource dataSource;
+	protected PlatformTransactionManager transactionManager;
 	
-	@Autowired
 	public void setDataSource(DataSource _dataSource) {
 		dataSource = _dataSource;
 	}
 	
-	@Autowired
 	public void setTransactionManager(PlatformTransactionManager _transactionManager) {
 		transactionManager = _transactionManager;
 	}
