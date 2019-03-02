@@ -3,25 +3,19 @@ package com.mycompany.BBScustom.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import com.mycompany.BBScustom.dto.BoardDto;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class BoardDao extends AbstractDao implements IBoardDao{
 	
-	public BoardDao(){
-		initialize("java:comp/env/jdbc/mydb",BoardDto.class);
-	}
-	
 	public BoardDto contentView(String idx) {
-		ArrayList<BoardDto> dtos = new ArrayList<>();
+		ArrayList<BoardDto> dtos=new ArrayList<>();
 		execute("SELECT * FROM board where idx=?",new DaoException(){
 			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{
 				ps.setInt(1,Integer.parseInt(idx));
 				rs =ps.executeQuery();
-				if(rs.next()) {
-					BoardDto dto= (BoardDto) bprm.mapRow(rs, 0);
-					dtos.add(dto);
-				}
+				mapper(BoardDto.class, rs, dtos);
 				return rs;
 			}
 		});
@@ -34,10 +28,7 @@ public class BoardDao extends AbstractDao implements IBoardDao{
 			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{
 				ps.setInt(1,Integer.parseInt(idx));
 				rs =ps.executeQuery();
-				if(rs.next()) {
-					BoardDto dto= (BoardDto) bprm.mapRow(rs, 0);
-					dtos.add(dto);
-				}
+				mapper(BoardDto.class, rs, dtos);
 				return rs;
 			}
 		});
@@ -49,10 +40,7 @@ public class BoardDao extends AbstractDao implements IBoardDao{
 		execute("SELECT idx, title, content, bdname, bddate, bdgroup, step, indent, hit FROM board order by bdgroup desc,step asc",new DaoException(){
 			public ResultSet executeTry(PreparedStatement ps, ResultSet rs) throws SQLException{
 				rs =ps.executeQuery();
-				for(int i=0;rs.next();i++) {
-					BoardDto dto= (BoardDto) bprm.mapRow(rs, i);
-					dtos.add(dto);
-				}
+				mapper(BoardDto.class, rs, dtos);
 				return rs;
 			}
 		});

@@ -16,7 +16,8 @@ import com.mycompany.BBScustom.service.*;
 @Controller
 public class BoardController {
 	
-	BoardService service;
+	AbstractBoardService service;
+	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@RequestMapping(value = "/list")

@@ -1,18 +1,13 @@
 package com.mycompany.BBScustom.service;
 
+import com.mycompany.BBScustom.dto.BoardDto;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.mycompany.BBScustom.dao.BoardDao;
-import com.mycompany.BBScustom.dto.BoardDto;
-
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.stereotype.Service;
-
 @Service
-public class BoardContentService implements BoardService {
+public class BoardContentService extends AbstractBoardService {
 
 	@Override
 	public void excute(Model model) {
@@ -20,7 +15,6 @@ public class BoardContentService implements BoardService {
 		Map<String,Object> map= model.asMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		String idx=request.getParameter("idx");
-		BoardDao dao = new BoardDao();
 		dao.upHit(idx);
 		BoardDto dto = dao.contentView(idx);
 		model.addAttribute("content_view",dto);

@@ -1,33 +1,31 @@
 package com.mycompany.BBScustom.dao;
 
 import java.sql.*;
-import javax.naming.*;
+import java.util.ArrayList;
+
+//import javax.naming.*;
 import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.*;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 public abstract class AbstractDao {
 
-	protected DataSource dataSource;
-	protected BeanPropertyRowMapper<?> bprm;
-	protected PlatformTransactionManager transactionManager;
+	protected  static DataSource dataSource;
+	protected static PlatformTransactionManager transactionManager;
 	
-	protected <T> void initialize(String name,Class<T> mappedClass) {
-		try {
-			Context context =new InitialContext();
-			dataSource =(DataSource)context.lookup(name);
-			bprm=new BeanPropertyRowMapper<>(mappedClass);
-			transactionManager=new DataSourceTransactionManager(dataSource);
-		}
-		catch(NamingException e) {
-			e.printStackTrace();
-		}
+	@Autowired
+	public void setDataSource(DataSource _dataSource) {
+		dataSource = _dataSource;
 	}
 	
+	@Autowired
+	public void setTransactionManager(PlatformTransactionManager _transactionManager) {
+		transactionManager = _transactionManager;
+	}
+
 	protected void execute(String query,DaoException daoquery) {
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -52,6 +50,12 @@ public abstract class AbstractDao {
 			}
 			catch(Exception e2) {
 			}
+		}
+	}
+	protected <T> void mapper(Class<T> mappedClass,ResultSet resultSet,ArrayList<T> dtos) throws SQLException {
+		BeanPropertyRowMapper<T> beanPropertyRowMapper =new BeanPropertyRowMapper<>(mappedClass);
+		for(int i=0;resultSet.next();i++) {
+			dtos.add(beanPropertyRowMapper.mapRow(resultSet, i));
 		}
 	}
 }
