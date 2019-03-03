@@ -157,11 +157,18 @@
 		   <version>8.0.13</version>
 		</dependency>
 		
-		<!-- xml한글파싱 -->
+		<!-- xml한글경로 -->
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
 			<version>2.9.1</version>
+		</dependency>
+		
+		<!-- 롬복 -->
+		<dependency>
+	    	<groupId>org.projectlombok</groupId>
+	    	<artifactId>lombok</artifactId>
+	    	<version>1.16.10</version> 
 		</dependency>
 		
 	</dependencies>
