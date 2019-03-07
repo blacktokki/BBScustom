@@ -13,9 +13,39 @@
 		<result property="hit" column="hit"/>
 	</resultMap>
 	
-	<select id="getBoardList" resultMap="board">
-		SELECT
-			idx, title, content, id, hit, bddate, bdgroup, step, indent
-		FORM BOARD
+	<select id="contentView" resultMap="board">
+		SELECT * FROM board where idx=?
 	</select>
+	
+	<select id="replyView" resultMap="board">
+		SELECT * FROM board where idx=?
+	</select>
+	
+	<select id="list" resultMap="board">
+		SELECT idx, title, content, bdname, bddate, bdgroup, step, indent, hit FROM board order by bdgroup desc,step asc
+	</select>
+	
+	<insert id="write">
+		insert into board (title,content,bdname,bdgroup,step,indent) select ?,?,?, ifnull(max(idx),0)+1 ,0,0 from board
+	</insert>
+	
+	<update id="modufy">
+		update board set bdname = ?,title = ?,content =?  where idx= ?
+	</update>
+	
+	<delete id="delete">
+		delete from board where idx= ?
+	</delete>
+	<insert id="reply">
+		insert into board (title,content,bdname,bdgroup,step,indent) values (?,?,?,?,?,?)
+	</insert>
+	
+	<update id="replyShape">
+		update board set step = step+1 where bdgroup = ? and step > ?
+	</update>
+	
+	<update id="upHit">
+		"update board set hit = hit+1 where idx= ? 
+	</update>
+	
 </mapper>
