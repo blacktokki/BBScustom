@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
-	<resultmap id="selectBoardList" type="com.sample.board.dto.BoardDto">
+	<resultMap id="board" type="com.mycompany.BBScustom.dto.BoardDto">
 		<result property="idx" column="idx"/>
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
@@ -9,9 +11,9 @@
 		<result property="step" column="step"/>
 		<result property="indent" column="indent"/>
 		<result property="hit" column="hit"/>
-	</resultmap>
+	</resultMap>
 	
-	<select id="getBoardList" resultmap="boardMap">
+	<select id="getBoardList" resultMap="board">
 		SELECT
 			idx, title, content, id, hit, bddate, bdgroup, step, indent
 		FORM BOARD
