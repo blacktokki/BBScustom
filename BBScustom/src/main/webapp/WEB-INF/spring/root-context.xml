@@ -16,25 +16,35 @@
 		<property name="password" value="${jdbc.password}"/>
 	</bean>	
 	
-	<bean id="jdbcTemplete" class="org.springframework.jdbc.core.JdbcTemplate" >
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
-		<property name="dataSource" ref="dataSource"/>
-	</bean>
+	<!-- transaction -->
 	
-	
-	<!--mybatis sql session template -->
+	<!--mybatis -->
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="WEB-INF/mappers/**Mapper.xml" />
+        <property name="mapperLocations" value="classpath*:com/mycompany/BBScustom/dao/**Mapper.xml" />
         <!--property name="configLocation" value="WEB-INF/mybatis-config.xml" /-->
     </bean>
 
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
+	
+	<bean id="BoardDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.mycompany.BBScustom.dao.BoardDao"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="boardDaoImpl" class="com.mycompany.BBScustom.dao.BoardDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<context:component-scan base-package="com.mycompany.BBScustom"> 
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/> 
+	</context:component-scan>  
 	
 </beans>

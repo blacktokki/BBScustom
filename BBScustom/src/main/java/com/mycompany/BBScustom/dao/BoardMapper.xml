@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.BBScustom.dao.BoardDao">
+	<resultMap id="board" type="com.mycompany.BBScustom.dto.BoardDto">
+		<result property="idx" column="idx"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="bdname" column="bdname"/>
+		<result property="bddate" column="bddate"/>
+		<result property="bdgroup" column="bdgroup"/>
+		<result property="step" column="step"/>
+		<result property="indent" column="indent"/>
+		<result property="hit" column="hit"/>
+	</resultMap>
+	
+	<select id="contentView" resultMap="board">
+		SELECT * FROM board where idx=#{param1}
+	</select>
+	
+	<select id="replyView" resultMap="board">
+		SELECT * FROM board where idx=#{param1}
+	</select>
+	
+	<select id="list" resultMap="board">
+		SELECT idx, title, content, bdname, bddate, bdgroup, step, indent, hit FROM board order by bdgroup desc,step asc
+	</select>
+	
+	<insert id="write">
+		insert into board (title,content,bdname,bdgroup,step,indent) select #{param1},#{param2},#{param3}, ifnull(max(idx),0)+1 ,0,0 from board
+	</insert>
+	
+	<update id="modify">
+		update board set bdname = #{param1},title = #{param2},content =#{param3}  where idx= #{param4}
+	</update>
+	
+	<delete id="delete">
+		delete from board where idx= #{param1}
+	</delete>
+	
+	<insert id="reply">
+		insert into board (title,content,bdname,bdgroup,step,indent) values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+	</insert>
+	
+	<update id="replyShape">
+		update board set step = step+1 where bdgroup = #{param1} and step > #{param2}
+	</update>
+	
+	<update id="upHit">
+		update board set hit = hit+1 where idx= #{param1} 
+	</update>
+	
+</mapper>
