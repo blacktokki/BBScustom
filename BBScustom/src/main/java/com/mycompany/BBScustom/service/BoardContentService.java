@@ -15,8 +15,8 @@ public class BoardContentService extends AbstractBoardService {
 		Map<String,Object> map= model.asMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		String idx=request.getParameter("idx");
-		boardDao.upHit(idx);
-		BoardDto dto = boardDao.contentView(idx);
+		getBoardDao().upHit(idx);
+		BoardDto dto = getBoardDao().contentView(idx);
 		model.addAttribute("content_view",dto);
 	}
 

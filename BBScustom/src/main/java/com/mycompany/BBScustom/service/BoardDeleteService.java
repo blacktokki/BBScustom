@@ -13,7 +13,7 @@ public class BoardDeleteService extends AbstractBoardService {
 		Map<String,Object> map= model.asMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		String idx=request.getParameter("idx");
-		boardDao.delete(idx);
+		getBoardDao().delete(idx);
 
 	}
 

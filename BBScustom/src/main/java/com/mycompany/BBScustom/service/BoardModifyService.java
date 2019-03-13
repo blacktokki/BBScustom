@@ -16,7 +16,7 @@ public class BoardModifyService extends AbstractBoardService {
 		String bdname= request.getParameter("bdname");
 		String title= request.getParameter("title");
 		String content= request.getParameter("content");
-		boardDao.modify(idx,bdname,title,content);
+		getBoardDao().modify(idx,bdname,title,content);
 
 	}
 
