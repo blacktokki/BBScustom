@@ -18,10 +18,6 @@
 		SELECT * FROM board where idx=#{param1}
 	</select>
 	
-	<select id="replyView" resultMap="board">
-		SELECT * FROM board where idx=#{param1}
-	</select>
-	
 	<select id="list" resultMap="board">
 		SELECT idx, title, content, bdname, bddate, bdgroup, step, indent, hit FROM board order by bdgroup desc,step asc
 	</select>

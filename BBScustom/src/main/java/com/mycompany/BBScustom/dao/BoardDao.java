@@ -7,8 +7,6 @@ public interface BoardDao extends Dao{
 	
 	public BoardDto contentView(String idx);
 	
-	public BoardDto replyView(String idx);
-	
 	public ArrayList<BoardDto> list();
 	
 	public void write(String bdname,String title,String content);
