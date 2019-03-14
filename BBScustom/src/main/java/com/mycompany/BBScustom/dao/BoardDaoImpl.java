@@ -17,7 +17,7 @@ public class BoardDaoImpl extends AbstractDao implements BoardDao{
 	}
 	
 	public BoardDto replyView(String idx) {	
-		String query = "select * from mvc_board where bId = " + idx;
+		String query = "SELECT * FROM board where idx = " + idx;
 		return getJdbcTemplate().queryForObject(query, new BeanPropertyRowMapper<BoardDto>(BoardDto.class));
 	}
 		
