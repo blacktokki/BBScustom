@@ -1,4 +1,4 @@
-package com.mycompany.BBScustom.service;
+package com.mycompany.BBScustom.service.board;
 
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BoardReplyViewService extends AbstractBoardService {
+public class BoardReplyViewService extends BoardService {
 
 	@Override
 	public void excute(Model model) {
