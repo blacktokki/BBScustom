@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BoardReplyService extends BoardService {
+public class BoardReplyService implements BoardService {
 
 	@Override
 	public void excute(Model model) {
@@ -18,8 +18,8 @@ public class BoardReplyService extends BoardService {
 		String bdgroup= request.getParameter("bdgroup");
 		String step= request.getParameter("step");
 		String indent= request.getParameter("indent");
-		getBoardDao().replyShape(bdgroup,step);
-		getBoardDao().reply(bdname,title,content,bdgroup,step,indent);
+		BOARD_DAO.replyShape(bdgroup,step);
+		BOARD_DAO.reply(bdname,title,content,bdgroup,step,indent);
 
 	}
 

@@ -1,14 +1,9 @@
 package com.mycompany.BBScustom.service.board;
 
-import javax.annotation.Resource;
-import com.mycompany.BBScustom.dao.BoardDao;
 import com.mycompany.BBScustom.service.Service;
+import com.mycompany.BBScustom.dao.BoardDao;
+import com.mycompany.BBScustom.util.Constant;
 
-import lombok.Getter;
-
-public abstract class BoardService implements Service{
-	
-	@Resource(name="boardDaoMapper")
-	@Getter
-	private BoardDao boardDao;
+public interface BoardService extends Service{
+	BoardDao BOARD_DAO=(BoardDao) Constant.getDaoMap().get("BoardMapper");
 }

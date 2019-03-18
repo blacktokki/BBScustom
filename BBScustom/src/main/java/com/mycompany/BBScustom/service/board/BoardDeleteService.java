@@ -6,14 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BoardDeleteService extends BoardService {
+public class BoardDeleteService implements BoardService {
 
 	@Override
 	public void excute(Model model) {
 		Map<String,Object> map= model.asMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		String idx=request.getParameter("idx");
-		getBoardDao().delete(idx);
+		BOARD_DAO.delete(idx);
 
 	}
 

@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class BoardListService extends BoardService {
+public class BoardListService implements BoardService {
 	
 	@Override
 	//@Transactional()
 	public void excute(Model model) {
-		ArrayList<BoardDto> dtos=getBoardDao().list();
+		ArrayList<BoardDto> dtos=BOARD_DAO.list();
 		model.addAttribute("list",dtos);
 	}
 

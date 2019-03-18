@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BoardModifyService extends BoardService {
+public class BoardModifyService implements BoardService {
 
 	@Override
 	public void excute(Model model) {
@@ -16,7 +16,7 @@ public class BoardModifyService extends BoardService {
 		String bdname= request.getParameter("bdname");
 		String title= request.getParameter("title");
 		String content= request.getParameter("content");
-		getBoardDao().modify(idx,bdname,title,content);
+		BOARD_DAO.modify(idx,bdname,title,content);
 
 	}
 
