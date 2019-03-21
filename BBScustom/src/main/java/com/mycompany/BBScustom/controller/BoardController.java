@@ -1,90 +1,75 @@
 package com.mycompany.BBScustom.controller;
 
 
+import java.util.Map;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.mycompany.BBScustom.service.*;
-/**
- * Handles requests for the application home page.
- */
+import com.mycompany.BBScustom.service.Service;
+
 @Controller
 public class BoardController {
 	
-	AbstractBoardService service;
+	@Resource(name="boardServiceMap")
+	private Map<String,Service> boardServiceMap;
 	
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	public void excuteService(String name,Model model) {
+		boardServiceMap.get(name).excute(model);
+	}
+	
+	public void excuteService(String name,Model model,HttpServletRequest request) {
+		excuteService(name,model.addAttribute("request",request));
+	}
 	
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
-			logger.info("list()");
-			service=new BoardListService();
-			service.excute(model);
-			return  "list";
+		excuteService("List",model);
+		return  "list";
 	}
 	
 	@RequestMapping(value = "/write_view")
 	public String write_view(Model model) {
-			logger.info("write_view()");
-			return  "write_view";
+		return  "write_view";
 	}
 	
 	@RequestMapping(value = "/write",method=RequestMethod.POST)
 	public String write(HttpServletRequest request,Model model) {
-			logger.info("write()");
-			model.addAttribute("request",request);
-			service=new BoardWriteService();
-			service.excute(model);
-			return  "redirect:list";
+		excuteService("Write",model,request);
+		return  "redirect:list";
 	}
 	
 	@RequestMapping(value = "/content_view")
 	public String content_view(HttpServletRequest request,Model model) {
-		logger.info("content_view()");
-		model.addAttribute("request",request);
-		service=new BoardContentService();
-		service.excute(model);
+		excuteService("Content",model,request);
 		return  "content_view";
 	}
 	
 	@RequestMapping(value = "/modify",method=RequestMethod.POST)
 	public String modify(HttpServletRequest request,Model model) {
-		logger.info("modify()");
-		model.addAttribute("request",request);
-		service=new BoardModifyService();
-		service.excute(model);
+		excuteService("Modify",model,request);
 		return  "redirect:list";
 	}
 	
 	@RequestMapping(value = "/reply_view")
 	public String reply_view(HttpServletRequest request,Model model) {
-		logger.info("reply_view()");
-		model.addAttribute("request",request);
-		service=new BoardReplyViewService();
-		service.excute(model);
+		excuteService("ReplyView",model,request);
 		return "reply_view";
 	}
 
 	@RequestMapping(value = "/reply",method=RequestMethod.POST)
 	public String reply(HttpServletRequest request,Model model) {
-		logger.info("reply()");
-		model.addAttribute("request",request);
-		service=new BoardReplyService();
-		service.excute(model);
+		excuteService("Reply",model,request);
 		return  "redirect:list";
 	}
 	
 	@RequestMapping(value = "/delete")
 	public String delete(HttpServletRequest request,Model model) {
-		logger.info("delete()");
-		model.addAttribute("request",request);
-		service=new BoardDeleteService();
-		service.excute(model);
+		excuteService("Delete",model,request);
 		return  "redirect:list";
 	}
 	/*
