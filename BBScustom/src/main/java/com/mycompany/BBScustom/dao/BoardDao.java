@@ -1,9 +1,10 @@
 package com.mycompany.BBScustom.dao;
 
 import java.util.ArrayList;
+
 import com.mycompany.BBScustom.dto.BoardDto;
 
-public interface BoardDao extends Dao{
+public interface BoardDao{
 	
 	public BoardDto contentView(String idx);
 	

@@ -1,11 +1,8 @@
 package com.mycompany.BBScustom.dto;
 import java.sql.Timestamp;
-
-import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Data
-@Component
 public class BoardDto{
 	int idx;
 	String title;
